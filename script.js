@@ -104,8 +104,18 @@ if(p.inv>0)p.inv--;particles.forEach(q=>{q.x+=q.vx;q.y+=q.vy;q.vy+=.08;q.life--}
 }
 function drawBackground(){
  const grad=ctx.createLinearGradient(0,0,0,H);grad.addColorStop(0,'#38234f');grad.addColorStop(1,'#17152f');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
- // One restrained parallax sky layer: a single moon field, no repeated moon stacks.
- if(assets.bg.complete&&assets.bg.naturalWidth){ctx.globalAlpha=.42;ctx.drawImage(assets.bg,0,-12,W,H+24);ctx.globalAlpha=1;}
+ // One restrained parallax layer. It shifts slightly opposite the player's
+ // movement, creating depth without adding extra moons or stacking backgrounds.
+ if(assets.bg.complete&&assets.bg.naturalWidth){
+   const bgW=W+64,bgH=H+32;
+   const px=player?player.x+player.w/2:W/2;
+   const py=player?player.y+player.h/2:H/2;
+   const offsetX=-32-(px-W/2)*.035+Math.sin(clock*.18)*5;
+   const offsetY=-16-(py-H/2)*.025;
+   ctx.globalAlpha=.42;
+   ctx.drawImage(assets.bg,offsetX,offsetY,bgW,bgH);
+   ctx.globalAlpha=1;
+ }
  // Soft distant stars; no grid overlay.
  for(let i=0;i<42;i++){const x=(i*137+Math.sin(clock*.22+i)*13)%W,y=(i*83)%H;ctx.globalAlpha=.22+.22*(.5+.5*Math.sin(clock*1.4+i));ctx.fillStyle='#fff0c8';ctx.fillRect(x,y,2,2)}ctx.globalAlpha=1;
 }
