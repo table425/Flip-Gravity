@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Placeholder!!!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #444;
+        }
+
+        #game {
+            position: relative;
+            width: 100vh;
+            height: 100vh;
+            background-color: #222;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .plr {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .winzone {
+            position: absolute;
+        }
+
+        .one {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            color: white;
+            z-index: 3;
+        }
+        .two {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            color: white;
+            z-index: 3;
+        }
+
+        h1 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background-color: beige; border: black; border-radius: 24px; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px; border: solid;">
+    <button onclick="musi()" class="music">
+        Unmute music
+    </button>
+    <input value="50" class="vol" type="number" max="100" min="1" placeholder="Volume">
+    </div>
+    <div id="game">
+        <img class="plr"></img>
+        <div class="winzone"></div>
+
+        <div class="one">
+            <h1>add a greeting to the player probably</h1>
+            <h1>Press A, and D to move side to side</h1>
+            <h1>Press W, or Space to flip your gravity</h1>
+            <h1>Touching a green zone takes you to the next level</h1>
+            <h1>Take a moment to familiarise yourself with the controls before going to the next level</h1>
+        </div>
+        <div class="two" style="margin-top: 30%;">
+            <h1>
+                This is a kill brick
+            </h1>
+            <h1>If you touch it you get sent back to the start of the level</h1>
+            <h1>This will be a very prevelant concept in the game</h1>
+        </div>
+        <iframe class="menu" src="menu.html"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        muted = true
+        const bgm = new Audio("sfx/bgm.mp3")
+        function musi() {
+            if (muted === true) {
+                muted = false
+                document.querySelector(".music").innerText = "Mute music"
+                bgm.play()
+            }
+            else {
+                muted = true
+                document.querySelector(".music").innerText = "Unmute music"
+                bgm.pause()
+            }
+        }
+        setInterval(function(){
+            if (document.querySelector(".vol").value>100) {
+                document.querySelector(".vol").value = 100
+            }
+            bgm.volume = document.querySelector(".vol").value/100
+        }, 250)
+    </script>
+
+</body>
+</html>
