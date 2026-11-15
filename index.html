@@ -1,21 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <title>
-            Placeholder!!!
-        </title>
-    </head>
-    <body style="font-family: 'Courier New', Courier, monospace;">
-        <div class="plr"></div>
-        <div class="winzone"></div>
-        <div>
-            <h1 class="1">add a greeting to the player probably</h1>
-            <h1 class="1">Press A, and D to move side to side</h1>
-            <h1 class="1">Press W, or Space to flip your gravity</h1>
-            <h1 class="1">Touching a green zone takes you to the next level</h1>
-            <h1 class="1">and touching a red zone takes you back to the start of your current level!</h1>
-            <h1 class="1">Take a moment to familiarise yourself with the controls before going to the next level</h1>
-        </div>
-        <script src="script.js">//\\</script>
-    </body>
-</html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#17112b">
+<title>Flip Gravity — Pixel Platform Adventure</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+:root{--ink:#211631;--panel:#2b1e42;--panel2:#392650;--cream:#fff1c9;--muted:#c5b6d9;--mint:#77f0b2;--pink:#ff719e;--gold:#ffe17b;--line:#755b91}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#17112b;color:var(--cream);font-family:'VT323',monospace}body{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at 50% 0%,#463064 0,#241a39 42%,#17112b 100%)}
+#shell{width:min(1100px,100%)}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 13px}.logo{font:18px 'Press Start 2P',monospace;line-height:1.5;letter-spacing:-1px;color:#fff1c9;text-shadow:3px 3px 0 #704d91}.logo b{color:var(--mint)}.tag{font-size:22px;color:#cbb9e0;letter-spacing:1px;text-align:right}
+#cabinet{position:relative;padding:12px;background:#322447;border:3px solid #8e70a6;box-shadow:0 0 0 4px #1a1228,0 16px 0 #100b1c,0 25px 55px #0008;border-radius:8px}#screen{position:relative;overflow:hidden;background:#35224d;border:3px solid #120d1c;image-rendering:pixelated}canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;image-rendering:pixelated;touch-action:none}
+#hud{position:absolute;inset:12px 16px auto;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;font-size:22px;text-shadow:2px 2px #24152f}.hudbox{display:flex;gap:16px;background:#211631b8;border:2px solid #b18ac6;padding:5px 10px;border-radius:4px}.hudbox strong{color:var(--gold);font-weight:normal}.hudright{display:flex;gap:9px;align-items:center}.gravity-pill{background:#211631d9;border:2px solid #b18ac6;padding:5px 10px;border-radius:4px;color:var(--mint)}
+#overlay{position:absolute;inset:0;display:grid;place-items:center;padding:18px;background:linear-gradient(#17112b9c,#17112be8);text-align:center}#overlay.hidden{display:none}.panel{width:min(570px,95%);padding:25px 24px 22px;background:#2b1e42ed;border:3px solid #a985bc;box-shadow:0 0 0 5px #211631,8px 8px 0 #100b1c;border-radius:6px}.kicker{font:9px 'Press Start 2P',monospace;color:var(--mint);letter-spacing:1px;line-height:1.8}.panel h1{font:clamp(22px,4.5vw,42px)/1.35 'Press Start 2P',monospace;margin:15px 0;color:#fff1c9;text-shadow:3px 3px 0 #714b8e}.panel p{font-size:25px;line-height:1.15;color:#d9cbe8;margin:12px auto;max-width:480px}.buttons{display:flex;justify-content:center;gap:11px;flex-wrap:wrap;margin-top:20px}button{font:17px 'Press Start 2P',monospace;font-size:10px;color:#fff1c9;background:#604478;border:2px solid #b18ac6;border-bottom-width:5px;border-radius:4px;padding:13px 15px;cursor:pointer;transition:transform .08s,filter .08s}button:hover{filter:brightness(1.2);transform:translateY(-2px)}button:active{transform:translateY(2px);border-bottom-width:2px}button.primary{background:#347d69;border-color:#8cf3be;color:#f4ffdf}.setting{display:grid;grid-template-columns:100px 1fr 48px;gap:12px;align-items:center;margin:17px auto;text-align:left;font-size:23px;color:#fff1c9;max-width:430px}.setting input{width:100%;accent-color:#77f0b2;cursor:pointer}.setting b{font-weight:normal;text-align:right;color:var(--mint)}.settings-panel h1{margin-bottom:22px}.tiny{font-size:18px;color:#b8a5ce!important;margin-top:17px!important}
+#controls{display:flex;align-items:center;justify-content:space-between;margin:15px 4px 0;gap:12px}.controlcopy{font-size:21px;color:#c5b6d9}.controlcopy b{color:var(--gold);font-weight:normal}.mobile{display:none;gap:9px}.mobile button{min-width:54px;padding:12px 13px;font-size:16px}.mobile .flip{background:#347d69;border-color:#8cf3be;color:#f4ffdf;min-width:86px}
+@media(max-width:700px){body{padding:8px}.topbar{margin-bottom:8px}.logo{font-size:13px}.tag{font-size:17px}#cabinet{padding:6px}.hudbox{font-size:17px;gap:8px;padding:3px 6px}.gravity-pill{font-size:17px;padding:3px 6px}.controlcopy{display:none}.mobile{display:flex;width:100%;justify-content:space-between}#controls{margin-top:9px}.panel{padding:18px 12px}.panel p{font-size:21px}.buttons button{font-size:9px}}
+</style></head>
+<body><main id="shell">
+<header class="topbar"><div class="logo">FLIP <b>★</b> GRAVITY</div><div class="tag">A tiny world turned upside down</div></header>
+<section id="cabinet"><div id="screen"><canvas id="game" width="960" height="540" aria-label="Flip Gravity game"></canvas>
+<div id="hud"><div class="hudbox"><span>STAGE <strong id="levelNum">01</strong></span><span>GEMS <strong id="shards">0/3</strong></span></div><div class="hudright"><span class="gravity-pill" id="gravityLabel">▼ DOWN</span><span class="hudbox" id="deaths">♥ 0</span></div></div>
+<div id="overlay"><div class="panel"><div class="kicker">★ PIXEL PLATFORM ADVENTURE ★</div><h1>FLIP<br><span style="color:#77f0b2">GRAVITY</span></h1><p>Run, jump between worlds and turn the floor into the ceiling. Find every gem to unlock the way out!</p><div class="buttons"><button class="primary" id="startBtn">START GAME</button><button id="howBtn">HOW TO PLAY</button></div><p class="tiny">A little platforming adventure.</p></div></div>
+</div></section>
+<div id="controls"><div class="controlcopy"><b>A / D</b> or <b>← / →</b> MOVE &nbsp; · &nbsp; <b>W / SPACE / ↑</b> FLIP &nbsp; · &nbsp; <b>ESC</b> PAUSE</div><div class="mobile"><button id="leftBtn">◀</button><button class="flip" id="flipBtn">FLIP ↕</button><button id="rightBtn">▶</button></div></div>
+</main><script src="script.js"></script></body></html>
